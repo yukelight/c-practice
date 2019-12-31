@@ -1,0 +1,23 @@
+#include<iostream>
+using namespace std;
+void move(char x,char y){
+	cout<<x<<"--->"<<y<<endl;
+}
+void hanota(int n,char a,char b,char c){
+	if(n==1)
+	    move(a,c);
+	else{
+		hanota(n-1,a,c,b);
+		move(a,c);
+		hanota(n-1,b,a,c);
+	}
+	}
+int main(){
+	int n;
+	char a='A',b='B',c='C';
+	cout<<"盘子数"<<endl;
+	cin>>n;
+	hanota(n,a,b,c); 
+	
+
+}
