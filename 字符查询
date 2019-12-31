@@ -1,0 +1,23 @@
+#include<iostream>
+using namespace std;
+char *strsea(char *s,char j){
+	while(*s!='\0'){
+		if(*s==j)
+		return s;
+	    s++;
+	}
+	return NULL;
+}
+int main(){
+	char key;
+	char it [20]="iloveyou";
+	char *s=it,*p;
+	cout<<"请输入要查询的字符"<<endl;
+	cin>>key;
+	p=strsea(s,key) ;
+	if(p==NULL)
+	cout<<"未查询到结果"<<endl;
+	else
+	cout<<"位置为"<<p-s<<endl; 
+	
+}
