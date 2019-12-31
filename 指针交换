@@ -1,0 +1,28 @@
+#include<iostream>
+using namespace std;
+void swap(int *xx,int *yy){
+	int temp;
+	temp=*xx;
+	*xx=*yy;
+	*yy=temp;
+}
+int main(){
+	int x,y,z;
+	char answer;
+	do{
+	cout<<"请输入三个数"<<endl;
+	cin>>x>>y>>z;
+	cout<<x<<'\0'<<y<<'\0'<<z<<endl;
+	if(x>y)
+	  swap(&x,&y);
+	if(x>z)
+	  swap(&x,&z);
+	if(y>z)
+	  swap(&y,&z); 
+	cout<<x<<'\0'<<y<<'\0'<<z<<endl;
+	cout<<"是否继续？(y/n)"<<endl;
+	cin>> answer;
+	}while(answer=='y');
+
+	return 0; 
+}
