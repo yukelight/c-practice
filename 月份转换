@@ -1,0 +1,26 @@
+#include<iostream>
+using namespace std;
+char *month_conv(int n){
+static char a[20]="illegal month"; 
+static char b[20]="january";
+static char c[20]="february";
+static char d[20]="march";
+	static char e[20]="april";
+	static char f[20]="may";
+	static char g[20]="june";
+	static char h[20]="july";
+	static char i[20]="august";
+	static char j[20]="september";
+	static char k[20]="october";
+	static char l[20]="november";
+	static char m[20]="december";
+	static char* month[]={a,b,c,d,e,f,g,h,i,j,k,l,m};
+	return (1<=n&&n<=12)?month[n]:month[0];	
+} 
+int main (){
+	int n;
+	cout<<"请输入月份"<<endl;
+	cin>>n;
+	cout<<month_conv(n)<<endl;
+	
+}
