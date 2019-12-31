@@ -1,0 +1,33 @@
+#include<iostream>
+#include<cmath>
+using namespace std;
+double sinx(double x){
+	return sin(x);
+	}
+double e_sqrx(double x){
+	return exp(x*x);
+    }
+double integral(double a,double b,double (*f)(double),int n){
+	double h,sum;
+	h=(b-a)/n;
+	sum=((*f)(a)+(*f)(b))/2;
+	for(int i=1;i<n;i++){
+		sum+=(*f)(a+h*i);
+	}
+	return h*sum;}
+int main(){
+	char fun_type;
+	double st,end,out;
+	int n;
+	cout<<"请选择函数类"<<endl;
+	cin>>fun_type;
+	if(fun_type=='s'){
+		cout<<"分别输入起始值和终止值"<<endl;
+		cin>>st>>end;
+		cout<<"输入精度"<<endl;
+		cin>>n; 
+		out=integral(st,end,sinx,n);
+		cout<<out<<endl;
+	}
+	  
+}
