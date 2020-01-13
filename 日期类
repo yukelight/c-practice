@@ -1,0 +1,135 @@
+#include<iostream> 
+#include<cstring>
+#include<cmath>
+using namespace std;
+class date{
+	private:
+		int year;
+		int month;
+		int day;
+		void each_day();
+		int  from_day();
+	public:
+		void set(int yy,int mm,int dd );
+		date(){
+			set(1900,1,1);
+		}
+		~date(){};
+		void print_ymd();
+		void print_myd();
+		bool IsLeapYear();
+		bool IsEndOfMonth();
+		void Add(int d);
+		int daytoday(date ymd);
+}; 
+int date::daytoday(date ymd){
+	int days;
+	days=abs(from_day()-ymd.from_day());
+	return days;
+}
+int  date::from_day(){
+	int days;
+	int yy=year-1900;
+	 days=yy*365;
+	if(yy)//???
+	days=days+(yy-1)/4;//???
+	switch(month)
+	{
+		case 12:days+=31;
+		case 11:days+=30;
+		case 10:days+=31;
+		case 9:days+=30;
+		case 8:days+=31;
+		case 7:days+=31;
+		case 6:days+=30;
+		case 5:days+=31;
+		case 4:days+=30;
+		case 3:days+=31;
+		case 2:if(IsLeapYear())
+		       	days+=29;
+		       else
+		        days+=28;
+		default:break;
+	}
+	days+=day;
+	return days;
+}
+void date::Add(int d){
+	for(int i=0;i<d;i++){
+		each_day();
+	}
+}
+void date::each_day(){
+	if(IsEndOfMonth())
+		if(month==12)
+		{
+			year++;
+			month=1;
+			day=1;
+		}
+		else
+		{
+			month++;
+			day=1;
+		}
+	else
+	{
+		day++;
+	}
+}
+void date::set(int yy=1900,int mm=1,int dd=1){
+	year=(yy>=1900&&yy<=2100)?yy:1900;
+	month=(mm>=0&&mm<=12)?mm:1;
+	switch(month)
+	{
+		case 4:
+		case 6:
+		case 9:
+		case 11:day=(day>=1&&day<=30)?dd:1;break;
+		case 2:if(IsLeapYear())
+		    	    day=(day>=1&&day<=29)?dd:1;
+		    	else
+		    	    day=(day>=1&&day<=28)?dd:1;
+		    	break;
+		default: day=(day>=1&&day<=31)?dd:1;
+	}
+} 
+bool date::IsLeapYear(){
+	if (year%400==0||year%100!=0&&year%4==0)
+	   return true;
+	else 
+	   return false;
+}
+bool date::IsEndOfMonth(){
+	switch(month)
+	{
+		case 4:
+		case 6:
+		case 9:
+		case 11:return day==30;
+		case 2:if(IsLeapYear())
+		           return day==29;
+		        else
+		        	return day==28;
+		default:return day==31;
+	}
+} 
+void date::print_ymd(){
+	cout<<year<<"-"<<month<<"-"<<day<<endl;
+}
+void date::print_myd(){
+	char* mon[]={"","january","february","march","april","may","june","july",
+	"august","september","october","november","december"};
+	cout<<mon[month]<<"."<<day<<" "<<year<<endl;
+}
+int main(){
+   date bir,bir2;
+   bir2.set(2010,3,15);
+   bir.set(2008,8,8);
+   bir.print_myd();
+   cout<<"100天后"<<endl; 
+   bir.Add(100);
+   bir.print_ymd();
+   cout<<"相距"<<endl; 
+   cout<<bir.daytoday(bir2)<<endl;
+}
