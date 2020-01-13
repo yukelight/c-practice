@@ -1,0 +1,66 @@
+#include<iostream>
+#include<fstream>
+#include<cstring>
+#include<cstdlib>
+#include<ctime>
+using namespace std;
+
+class card{
+	public:
+		string suit;
+		string face;
+};
+class cardmanger{
+	private:
+		card deck [4][13];
+	public:
+		cardmanger();
+		void shuffle();
+		void deal();
+		~cardmanger(){};	
+};
+cardmanger::cardmanger()
+	{string suit[]={"红桃","黑桃","方片","梅花"};
+			string face[]={"A","2","3","4","5","6","7","8","9","10","J","Q","K"};
+			for(int i=0;i<4;i++)
+				for(int j=0;j<13;j++){
+					deck[i][j].suit=suit[i];
+					deck[i][j].face=face[j];
+				} 
+		
+	}
+void cardmanger::shuffle()
+{	srand(time(NULL));
+	for(int i=0;i<4;i++)
+		for(int j=0;j<13;j++){
+			int m=rand()%4;
+			int n=rand()%13;
+			card temp;
+			temp=deck[i][j];
+			deck[i][j]=deck[m][n];
+			deck[m][n]=deck[i][j];
+		}
+		
+}
+void cardmanger::deal()
+{	ofstream file("cardconditian.txt");
+    if(!file)
+	{	cout<<"打开文件失败"<<endl;
+	    return ; 
+	}
+	string person[]={"甲","乙","丙","丁"};
+	for(int i=0;i<4;i++){
+		file<<person[i]<<"的牌"<<endl;
+		for(int j=0;j<13;j++){
+			file<<deck[i][j].suit<<'\0'<<deck[i][j].face<<'\t';
+		}
+		file<<endl<<endl; 
+	}
+	file.close();
+}
+int main(){
+	cardmanger mm;
+	mm.shuffle();
+	mm.deal();
+	return 0;
+}
