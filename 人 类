@@ -1,0 +1,88 @@
+#include<iostream>
+#include<cstring>
+#include<windows.h>
+#include<mmsystem.h>
+#pragma comment(lib,"winmm.lib") 
+using namespace std;
+static char *num1[]={"","one","two","three","four","five","six","seven","eight","nine"
+,"ten","eleven","twelve","thirteen","fourteen","fifteen","sixteen","seventeen",
+"eighteen","ninteen"}; 
+static char *num10[]={"","","twenty","thirty","fourty","fifty","sixty","seventy",
+"eighty","ninty"};
+class person{
+	private:
+		char *name;
+		int age;
+		int weight;
+	public:
+		person(char*,int,int);
+		void walking(int,int);
+		void ChangeData(char*,int,int);
+		void hearing(char* sentence);
+		void saying();
+		void reading();
+		void wringting();
+		~person(){delete []name;}
+};
+ person::person(char *nam="XXX",int ag=0,int wei=0){
+ 	
+	name=new char[strlen(nam)+1];
+	strcpy(name,nam);
+	age=ag;
+	weight=wei;
+}
+void person::walking(int k,int v){
+	cout<<"以"<<v<<"的速度走"<<k<<"步"<<endl;
+	for(int i=0;i<k;i++){
+	cout<<' '<<"O_O";
+	Sleep(1000/v);
+	cout<<"\b\b\b"; 
+}
+cout<<endl;
+}
+void person::hearing(char *sentence){
+	cout<<sentence<<endl;		
+	char* p;
+	p=new char[strlen(sentence)+1];
+	strcpy(p,sentence);
+	char *pp=p;
+	while(*p)
+	{
+		if(*p<='z'&&*p>='a')
+		*p='A'+(*p-'a'+0);
+		else if(*p<='Z'&&*p>='A')
+		     *p='a'+(*p-'A');
+		p++;
+	}
+	cout<<pp<<endl;
+	delete pp;
+}
+class sing_star:public person{
+	private:
+		float salary;
+	public:
+		sing_star(char*,int,int,float);
+		void sing(char*);
+	
+	};
+sing_star::sing_star(char *nam,int ag,int wei,float sala):person(nam,ag,wei)
+{
+	//person::person(nam,ag,wei);
+	salary=sala;
+}
+void sing_star::sing(char* ps){
+	char str[100]="play";
+	strcat(str,ps);
+	cout<<str<<endl;
+	mciSendString(str,NULL,0,0);
+	char a;
+	cin>>a;
+}
+int main(){
+	person k;
+	k.walking(5,4);
+	k.hearing("HELLO WORLD");
+	sing_star jay("jay",23,120,12000);
+	jay.sing("周杰伦 - 晴天 (伴奏).mp3");
+	//jay.sing("C:\\周杰伦 - 晴天 (伴奏).mp3");
+}
