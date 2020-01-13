@@ -1,0 +1,58 @@
+#include<iostream>
+#include<fstream>
+#include<cstring>
+using namespace std;
+class stu{
+	private:
+		char name[20];
+		char sex[10];
+		int age;
+	public:
+		stu(){};
+		stu(char*name,char*sex,int age);
+		void show();
+		~stu(){};
+};
+stu::stu(char*name,char*sex,int age)
+{	strcpy(this->name,name);
+	strcpy(this->sex,sex);
+	this->age=age;
+}
+void stu::show()
+{	cout<<name<<'\t'<<sex<<'\t'<<age<<endl;
+}
+int main(){
+//	stu s[2]={stu("张三","男",23),stu("李四","女",24)};
+//	ofstream fout("学生表.dat",ios::binary);
+//	if(!fout)
+//	{
+//		cout<<"文件打开失败"<<endl;
+//		return 1; 
+//	}
+//	for(int i=0;i<2;i++)
+//		fout.write((char*)&s[i],sizeof(s[i])); 
+//	fout.close(); 
+	ifstream file2("学生表.dat",ios::binary);
+	stu s2;
+	if(!file2)
+	{
+		cout<<"文件打开失败"<<endl;
+		return 1; 
+	}
+	file2.seekg(0,ios::end);
+	int len=file2.tellg();
+	for(int k=len/sizeof(s2)-1;k>=0;k--)
+	{
+		file2.seekg(k*sizeof(s2));
+		file2.read((char*)&s2,sizeof(s2));
+		s2.show();
+	}
+	file2.close();
+//	while(file2){
+//	
+//		file2.read((char*)&s2,sizeof(s2));
+//		if(file2) s2.show();
+//		}
+//		file2.close();
+		return 0;
+}
