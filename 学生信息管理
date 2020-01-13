@@ -1,0 +1,109 @@
+#include<iostream>
+#include<fstream>
+#include<cstring>
+using namespace std;
+class student{
+	public:
+		char name[20];
+		int stu_number;
+		int math;
+		int eng;
+		int sci;
+		int ave;
+};
+class info{
+	private:
+		student stu[20];
+		int count;
+	public:
+		info(){}
+		void getscore(char*);
+		void getscore(char*,int);
+		void show();
+		void aver();
+		void fileout();
+		//ofstream & operator <<(&ofstream)
+		~info(){}
+};
+void info::getscore(char*filename)
+{
+	ifstream file(filename);
+	if(!file)return;
+	//char nam;int id;
+	count=0;
+	while(file)
+	{
+		file>>stu[count].name>>stu[count].stu_number;
+		count++;
+	}
+	file.close();
+	count=count-1;
+}
+void info::getscore(char*filename,int n)
+{
+	ifstream file(filename);
+	if(!file)return;
+	int id,score;
+	while(file)
+	{   int i;
+		file>>id>>score;
+		for( i=0;i<count;i++)
+		{
+			if(stu[i].stu_number==id)
+			{
+				switch(n)
+				{	
+					case 1: stu[i].math=score;break;
+					case 2: stu[i].eng=score;break;
+					default:stu[i].sci=score; 
+				}
+			break;
+				
+			}
+			
+		}
+		
+	}
+	file.close();
+}
+void info::aver()
+{
+	for(int i=0;i<count;i++)
+	{
+	stu[i].ave=(stu[i].eng+stu[i].math+stu[i].sci)/3;	
+	}
+} 
+void info::show()
+{
+	cout<<"姓名\t学号\t数学\t英语\t科学\t平均"<<endl;
+	for(int i=0;i<count;i++)
+	{
+		cout<<stu[i].name<<'\t'<<stu[i].stu_number<<'\t'<<stu[i].math<<'\t'<<stu[i].eng<<'\t'<<stu[i].sci<<'\t'<<stu[i].ave<<endl;
+	}
+}
+void info::fileout()
+{
+	ofstream file("infomation.txt");
+	if(!file)
+	{
+		cout<<"打开文件失败"<<endl;
+		return; 
+	}
+	file<<"姓名\t学号\t数学\t英语\t科学\t平均"<<endl;
+	for(int i=0;i<count;i++)
+	{
+		file<<stu[i].name<<'\t'<<stu[i].stu_number<<'\t'<<stu[i].math<<'\t'<<stu[i].eng<<'\t'<<stu[i].sci<<'\t'<<stu[i].ave<<endl;
+	}
+	file.close();
+	cout<<"文件生成成功"<<endl; 
+}
+int main(){
+	info ss;
+	ss.getscore("BasicInfomation.txt");
+	ss.getscore("math.txt",1);
+	ss.getscore("eng.txt",2);
+	ss.getscore("sci.txt",3);
+	ss.aver();
+	ss.show();
+	ss.fileout();
+}
