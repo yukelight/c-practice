@@ -1,0 +1,77 @@
+#include<iostream>
+#include<fstream>
+#include<cstring>
+using namespace std;
+class wordtype{
+	public:
+		char name[20];
+		int count;
+	
+};
+class wordcount{
+	private:
+		int n;
+		wordtype cc [50];
+	public:
+		wordcount()
+		{
+			for(int i=0;i<=50;i++)
+			{
+				cc[i].count=0;
+			}
+			n=0;
+		}
+		void getwords();
+		void show();
+		~wordcount(){}
+};
+void wordcount::getwords(){
+	
+	ifstream file3("wordcount.txt");
+	char word[20]; 
+	if(!file3){
+		cout<<"打开文件失败"<<endl;
+		return ; 
+	}
+	while(file3)
+	{   
+//	int i=0;
+		bool flag=false;
+		file3>>word;
+		for(int j=0;j<=n;j++){
+		
+		if(!strcmp(word,cc[j].name))//!!!!!
+		{	cc[j].count++;
+			flag=true;
+			break;
+		}
+		}
+		if(!flag)
+		{
+			
+			strcpy(cc[n].name,word);
+			cc[n].count=1;
+			n++;
+		}
+		
+	}
+	file3.close();
+	return  ;
+}
+void wordcount::show()
+{
+	
+	for(int i=0;i<n;i++)
+	cout<<cc[i].name<<'\t'<<cc[i].count<<"次"<<endl;
+//	while(cc[i].count>0)
+//	{
+//		cout<<cc[i].name<<'\t'<<cc[i].count<<"次"<<endl; 
+//	}
+	return; 
+}
+int main(){
+	wordcount ss;
+	ss.getwords();
+	ss.show();
+	return 0;
+}
