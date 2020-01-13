@@ -1,0 +1,90 @@
+#include<iostream>
+#include<cstring>
+using namespace std;
+static char *num1[]={"","one","two","three","four","five","six","seven","eight","nine"
+,"ten","eleven","twelve","thirteen","fourteen","fifteen","sixteen","seventeen",
+"eighteen","ninteen"}; 
+static char *num10[]={"","","twenty","thirty","fourty","fifty","sixty","seventy",
+"eighty","ninty"};
+class trans{
+	private:
+		char name[];
+		char type[];
+	public:
+		trans(){
+		char nam[20]="XXX";char typ[20]="XXXXX";
+		strcpy(name,nam);strcpy(type,typ);
+		}
+		void out(int);
+		void interp(int);
+		~trans(){};
+};
+void trans::out(int n){
+	int a=n%100;
+	if(n/100!=0)
+	{
+		cout<<num1[n/100]<<" hundred ";
+		if(a!=0)
+		{
+			cout<<" and ";
+		}
+	}
+	if(a<20)
+	{
+		cout<<num1[a];
+	}
+	else
+	{
+	if(a/10!=0)
+		{
+		cout<<num10[a/10];
+		}
+	if(a%10!=0)
+		{
+		cout<<" \b-"<<num1[a%10];
+		}		
+	}
+}
+void trans::interp(int n){
+	if(n>1999999999)
+	cout<<"超出计算上限1999999999"<<endl;
+	else
+	{
+	int a=n/1000000000,b=(n%1000000000)/1000000,c=(n%1000000)/1000,d=n%1000;
+		if(a!=0)
+		{
+			cout<<a<<endl;
+			out(a);
+			cout<<" billion ";
+		}	
+		if(b!=0)
+		{
+			out(b);
+			cout<<" million "; 
+		}
+		if(c!=0)
+		{
+			out(c);
+			cout<<" thousand ";
+		}
+		if(d!=0)
+		{
+			if(d<100&&(a!=0||b!=0||c!=0))
+				cout<<" and ";
+			out(d);
+		}
+	cout<<endl;
+	}	 
+}
+int main(){
+	int n;	
+	trans ss;
+	cout<<"请输入整数(<1999999999)"<<endl;
+    cin>>n;	
+    cout<<n<<endl;
+   // trans ss;????n为什么会变 
+	cout<<n<<endl;
+   
+	ss.interp(n);
+    return 0;
+}
