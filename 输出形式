@@ -1,0 +1,45 @@
+#include<iostream>
+#include<iomanip>
+using namespace std;
+int main()
+{
+	int a=456;
+	cout<<dec<<a<<endl;
+	cout<<hex<<a<<endl;
+	cout<<oct<<a<<endl;
+	char s[]="laiwu";
+	//cout<<setw(15)<<s<<endl;
+	cout<<setw(15)<<s<<endl;
+//	cout<<setfill('*')<<setw(15)<<s<<endl;
+	cout<<setfill('*')<<s<<endl;
+	double b=123.4566778;
+	cout<<setiosflags(ios::scientific)<<setprecision(3)<<b<<endl;
+	cout<<resetiosflags(ios::scientific)<<setiosflags(ios::fixed)<<setprecision(3)<<b<<endl;
+	return 0;
+	
+//char s[100];
+//	cin.get(s,70,'|'); 
+//	cout<<s<<endl;
+//	cin.ignore(1);
+//	cin.get(s,70);
+//	cout<<s<<endl;
+//	cin.getline(s,70,'/');
+//	cout<<s<<endl;
+//	cin.getline(s,70);
+//	cout<<s<<endl; 
+//	cout.setf(ios::left|ios::showpoint);
+//	cout.precision(5);
+//	cout.width(8);
+//    //cout<<123.4567890<<endl;
+//	//cout.fill('*');
+//	//cout<<123.4567890<<endl;
+//	cout.unsetf(ios::left);
+//	cout.setf(ios::right);
+//	cout.fill('*');
+//	cout.setf(ios::fixed);
+//	cout.precision(3);
+ 
+//	cout.unsetf(ios::fixed);
+//	cout.setf(ios::scientific);
+//	cout<<123.4567890<<endl;	
+}
