@@ -1,0 +1,69 @@
+#include<iostream>
+using namespace std;
+class Complex
+{
+	private:
+		double real,image;
+	public:
+		Complex(double r=0,double i=0):real(r),image(i){}
+		double Real(){return real;}
+		double Image(){return image;}
+		Complex operator + (Complex&);//???
+		Complex operator + (double);
+		bool operator == (Complex);//???
+		Complex operator ++ ();
+		Complex operator ++	(int);
+		~Complex(){}
+};
+Complex Complex::operator +(Complex &cc )
+{
+	Complex tempt;
+	tempt.real=real+cc.real;
+	tempt.image=image+cc.image;
+	return tempt;	
+}
+Complex Complex::operator +(double r)
+{
+	real+=r;
+	return *this;
+}
+bool Complex::operator ==(Complex cc)
+{
+	if(real==cc.real&&image==cc.image)
+		return true;
+	else
+		return false;
+}
+Complex Complex::operator ++()
+{
+	real+=1;
+	return *this;
+}
+Complex Complex::operator ++(int)
+{
+	real+=1;
+	return *this;
+}
+int main(){
+	Complex aa(3,3),bb(4,4),cc;
+	cc=aa+bb;
+	double a,b;
+//	a= cc.Real();
+//	b= cc.Image();
+//	cout<<a<<"+j"<<b<<endl;
+	cout<<cc.Real()<<"+j"<<cc.Image()<<endl;
+	cc++;
+//	a= cc.Real();
+//	b= cc.Image();
+//	cout<<a<<"+j"<<b<<endl;
+	cout<<cc.Real()<<"+j"<<cc.Image()<<endl;
+	++cc;
+//	a= cc.Real();
+//	b= cc.Image();
+//	cout<<a<<"+j"<<b<<endl;
+	cout<<cc.Real()<<"+j"<<cc.Image()<<endl;
+	if(aa==bb)
+		cout<<"一致"<<endl;
+	else
+	    cout<<"不一致"<<endl; 
+}
