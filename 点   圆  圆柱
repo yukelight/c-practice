@@ -1,0 +1,123 @@
+#include<iostream>
+#include<cstring>
+#include<cmath>
+using namespace std;
+class point{
+	private:
+		int x;
+		int y;
+	public:
+		point(){x=0;y=0;}
+		point(int ,int);
+		void set(int,int);
+		int Getx(){return x;}
+		int Gety(){return y;}
+		void show();
+		~point(){}
+};
+point::point(int x,int y)
+{
+	point::set(x,y);
+}
+void point::set(int x,int y)
+{
+	this->x=x;
+	this->y=y;
+}
+void point::show()
+{
+	cout<<"x="<<x<<'\t'<<"y="<<y<<endl;
+}
+class circle:public point
+{	private:
+		double radius;
+	public:
+		circle();
+		circle(int,int,double);
+		void set(int,int,double);
+		double Area();
+		GetRadius(){return radius;}
+		void show();
+		~circle(){};		
+};
+circle::circle():point()
+{
+	radius=0;
+}
+circle::circle(int x,int y,double r)
+{
+	circle::set(x,y,r);
+}
+void circle::set(int x,int y,double r)
+{
+	point::set(x,y);
+	radius=r;
+}
+double circle::Area()
+{
+	return 3.1415926*radius*radius;
+}
+void circle::show()
+{
+	point::show();
+	cout<<"半径为"<<radius<<endl; 
+}
+class cylinder:public circle
+{	private:
+		double high;
+	public:
+		cylinder();
+		cylinder(int,int,double,double);
+		void set(int,int,double,double);
+		double Area();
+		double volume();
+		void show();
+		double GetHigh(){return high;}
+		~cylinder(){};
+}; 
+cylinder::cylinder():circle()
+{
+	high=0;
+}
+cylinder::cylinder(int x,int y,double r,double h)
+{
+	cylinder::set(x,y,r,h);//llll
+}
+void cylinder::set(int x,int y,double r,double h)
+{
+	circle::set(x,y,r);
+	high=h;
+}
+double cylinder::Area()
+{
+	return 2*3.1415926*(GetRadius()*GetRadius())+2*3.1415926*GetRadius()*high;
+}
+double cylinder::volume()
+{
+	return high*circle::Area();
+}
+void cylinder::show()
+{
+	circle::show();
+	cout<<"高="<<high; 
+}
+int main()
+{
+	int x,y;
+	double r,h;
+	cout<<"输入坐标"<<endl; 
+	cin>>x>>y;
+	point center(x,y);
+	center.show();
+	cout<<"输入半径"<<endl;
+	cin>>r;
+	circle yuan (x,y,r);
+	yuan.show();
+	cout<<"圆面积为"<<yuan.Area()<<endl;
+	cout<<"输入高"<<endl;
+	cin>>h;
+	cylinder yuanzhu(x,y,r,h); 
+	yuanzhu.show();
+	cout<<"圆柱表面积"<<yuanzhu.Area();
+	cout<<"圆柱体积"<<yuanzhu.volume();  	
+}
