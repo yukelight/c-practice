@@ -1,0 +1,25 @@
+#include<iostream>
+#include<cmath> 
+using namespace std; 
+int main(){
+	const int n=101;
+	char str[n];
+	int len=0,small=0,big=0,digit=0,other=0,i=0;
+	cout<<"请输入字符"<<endl; 
+	cin.getline(str,n);
+	while(str[i]!='\0'){
+		len++;
+		if( str[i]>='A'&&str[i]<='Z')
+			big++;
+		else if(str[i]>='a'&&str[i]<='z')
+			small++;
+			 else if(str[i]>='0'&&str[i]<='9')
+			digit++;
+			     else
+			other++;
+			
+			i++;
+		}
+	cout<<"长"<<len<<endl<<"da"<<big<<endl<<"xiao"<<small<<endl<<"shu"<<digit<<endl;
+			
+		}
