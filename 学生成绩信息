@@ -1,0 +1,80 @@
+#include<iostream>
+#include<cstring>
+using namespace std;
+class Info{
+	private:
+		int id;
+		char name[20];
+		int pro_gra,sci_gra,tot_gra;
+	public:
+		void set(int,char*,int,int);
+		int Get_Pro(){return pro_gra;}
+		int Get_Sci(){return sci_gra;}
+		int Get_Tot(){return tot_gra;}
+		void show();
+};
+void Info::set(int idd,char *nam,int pro,int sci){	
+	id=idd;
+	strcpy(name,nam);
+	pro_gra=pro;
+	sci_gra=sci;
+	tot_gra=pro+sci;
+}
+void Info::show(){
+	cout<<id<<'\t';
+	cout<<name<<'\t';
+	cout<<pro_gra<<'\t';
+	cout<<sci_gra<<'\t';
+	cout<<tot_gra<<'\t';
+}
+
+int main(){
+	 int count;
+	Info *wande;  
+	int sci,pro,id;
+	char nam[20];
+	cout<<"需要几人"<<endl;
+	cin>> count; 
+	wande=new Info[count];
+	cout<<"请输入学生信息"<<endl;
+	cout<<"学号"<<'\t'<<"姓名"<<'\t'<<"编程成绩"<<'\t'<<"科学成绩"<<'\t'<<endl;
+	for(int i=0;i<count;i++){
+    	cin>>id>>nam>>pro>>sci;
+		wande[i].set(id,nam,pro,sci); 
+		
+	}
+	for(int i=0;i<count;i++){
+	
+	wande[i].show();
+	cout<<endl;
+    }
+ for(int i=0;i<count;i++)
+	for(int j=count-1;j>i;j--){
+		if(wande[j].Get_Tot()>wande[j-1].Get_Tot()){
+			Info tempt;
+			tempt=wande[j-1];
+			wande[j-1]=wande[j];
+			wande[j]=tempt;
+			
+		}
+	}
+	cout<<"学号  姓名 编程成绩 科学成绩 总成绩"<<endl;
+	for(int i=0;i<count;i++){
+		wande[i].show();
+	    cout<<endl;
+    }
+    cout<<"学号  姓名 编程成绩 科学成绩 总成绩"<<endl;
+	for(int i=0;i<count;i++){
+		if(wande[i].Get_Pro()>85&&wande[i].Get_Sci()>85&&wande[i].Get_Tot()>85)
+		{
+		wande[i].show();
+	    cout<<endl;
+		}
+    }
+}
+
+//2020001  阿兰    99 21 
+//2020002  阿达    55 66  
+//2020003  阿卡丽  99 88 
+//2020004  阿哥    77 87 
+//2020005  欧阳咳咳55 77 
